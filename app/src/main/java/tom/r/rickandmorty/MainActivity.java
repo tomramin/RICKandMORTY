@@ -1,10 +1,12 @@
 package tom.r.rickandmorty;
 
 import android.app.ProgressDialog;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +31,14 @@ import tom.r.rickandmorty.Model.Character;
 
 public class MainActivity extends AppCompatActivity {
 
+    MediaPlayer mySound;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySound.release();
+    }
+
     private static final String URL_DATA = "https://rickandmortyapi.com/api/character/";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -48,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         loadRecyclerViewData();
 
+        mySound = MediaPlayer.create(this, R.raw.song);
+    }
+
+    public void playMusic(View view) {
+        mySound.start();
     }
 
     private void loadRecyclerViewData(){
@@ -97,5 +112,6 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
 
 }
