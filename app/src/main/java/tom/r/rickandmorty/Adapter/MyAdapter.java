@@ -39,7 +39,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         viewHolder.character_name.setText(""+character.getName());
 
-        //Picasso.get().load(character.getImage()).into(viewHolder.character_image);
+        Picasso.with(context)
+                .load(character.getImage())
+                .into(viewHolder.character_image);
     }
 
     @Override
