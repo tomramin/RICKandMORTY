@@ -9,6 +9,15 @@ public class Character {
     private String gender;
     private String image;
 
+    public Character(String name, String status, String species, String type, String gender, String image) {
+        this.name = name;
+        this.status = status;
+        this.species = species;
+        this.type = type;
+        this.gender = gender;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
