@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.LayoutInflater;
-import android.view.*;
-import tom.r.rickandmorty.Adapter.MyAdapter;
-import tom.r.rickandmorty.Model.Character;
-import com.squareup.picasso.Picasso;
-import java.lang.*;
 
+import com.squareup.picasso.Picasso;
+
+import java.lang.*;
 import static tom.r.rickandmorty.MainActivity.EXTRA_NAME;
 import static tom.r.rickandmorty.MainActivity.EXTRA_STATUS;
 import static tom.r.rickandmorty.MainActivity.EXTRA_SPECIES;
@@ -40,7 +36,7 @@ public class CharacterDetail extends AppCompatActivity {
         TextView textViewGender = findViewById(R.id.gender);
         ImageView imageView = findViewById(R.id.photoImageView);
 
-        //Picasso.get().load(characterImage).into(imageView);
+        Picasso.get().load(characterImage).into(imageView);
         textViewName.setText(characterName);
         textViewStatus.setText("Status: "+characterStatus);
         textViewSpecies.setText("Species: "+characterSpecies);

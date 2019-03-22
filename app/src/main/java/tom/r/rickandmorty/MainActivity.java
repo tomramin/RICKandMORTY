@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
     private static final String URL_DATA = "https://rickandmortyapi.com/api/character/";
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    //private RecyclerView.Adapter adapter;
     //modif
     private MyAdapter myAdapter;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = /*(RecyclerView)*/ findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
     }
 
     //modif
+    /*
     public static String remover(String oldString){
         String newString = oldString.replace(',','-');
         newString = newString.replace('"',' ');
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
         newString = newString.replace("(Female)","");
 
         return newString;
-    }
+    }*/
 
     private void loadRecyclerViewData(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemC
                                         object.getString("name"),
                                         object.getString("status"),
                                         object.getString("species"),
-                                        object.getString("type"),
                                         object.getString("gender"),
                                         object.getString("image")
                                 );
