@@ -1,6 +1,7 @@
 package tom.r.rickandmorty;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +30,13 @@ import tom.r.rickandmorty.Model.Character;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener{
+    //modif
+    public static final String EXTRA_NAME = "characterName";
+    public static final String EXTRA_STATUS = "characterStatus";
+    public static final String EXTRA_SPECIES = "characterSpecies";
+    public static final String EXTRA_GENDER = "characterGenre";
+    public static final String EXTRA_URL = "characterImage";
 
     MediaPlayer mySound;
 
@@ -42,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String URL_DATA = "https://rickandmortyapi.com/api/character/";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    //modif
+    private MyAdapter myAdapter;
 
     private List<Character> characterList;
 
@@ -63,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void playMusic(View view) {
         mySound.start();
+    }
+
+    //modif
+    public static String remover(String oldString){
+        String newString = oldString.replace(',','-');
+        newString = newString.replace('"',' ');
+        newString = newString.replace("[","");
+        newString = newString.replace("]","");
+        newString = newString.replace("(Male)","");
+        newString = newString.replace("(Female)","");
+
+        return newString;
     }
 
     private void loadRecyclerViewData(){
@@ -93,9 +114,14 @@ public class MainActivity extends AppCompatActivity {
                                 );
                                 characterList.add(character);
                             }
+                            //avant
+                            //adapter = new MyAdapter(characterList,getApplicationContext());
+                            //recyclerView.setAdapter(adapter);
 
-                            adapter = new MyAdapter(characterList,getApplicationContext());
-                            recyclerView.setAdapter(adapter);
+                            //modif
+                            myAdapter = new MyAdapter(characterList,MainActivity.this);
+                            recyclerView.setAdapter(myAdapter);
+                            myAdapter.setOnItemClickListener(MainActivity.this);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -113,5 +139,18 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    //modif onitemclick
+    @Override
+    public void onItemClick(int i) {
+        Intent detailIntent = new Intent(this, CharacterDetail.class);
+        Character clickedItem = characterList.get(i);
 
+        detailIntent.putExtra(EXTRA_NAME, clickedItem.getName());
+        detailIntent.putExtra(EXTRA_STATUS, clickedItem.getStatus());
+        detailIntent.putExtra(EXTRA_SPECIES, clickedItem.getSpecies());
+        detailIntent.putExtra(EXTRA_GENDER, clickedItem.getGender());
+        detailIntent.putExtra(EXTRA_URL, clickedItem.getImage());
+
+        startActivity(detailIntent);
+    }
 }
