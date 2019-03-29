@@ -11,16 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import tom.r.rickandmorty.Model.Character;
+
+import java.util.ArrayList;
 import java.util.List;
 import tom.r.rickandmorty.R;
 
+/**
+ * @author Tom
+ */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Character> listCharacters;
     private Context context;
-    private OnItemClickListener mListener; //modif
+    private OnItemClickListener mListener;
 
-    public interface OnItemClickListener{ // modif
+    public interface OnItemClickListener{
         void onItemClick(int i);
     }
 
@@ -46,11 +51,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         final Character character = listCharacters.get(i);
 
-        viewHolder.character_name.setText(character.getName()); //(""+character.getName()) -> warning
+        viewHolder.character_name.setText(character.getName());
 
+        // Use Picasso to load image from API
         Picasso.get()
                 .load(character.getImage())
                 .into(viewHolder.character_image);
+    }
+
+    public void setFilter(List<Character> characters){
+        listCharacters = new ArrayList<>();
+        listCharacters.addAll(characters);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -62,16 +74,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public TextView character_name;
         public ImageView character_image;
-        public LinearLayout linearLayout; //modif
-
+        public LinearLayout linearLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            character_name = (TextView) itemView.findViewById(R.id.character_name);
-            character_image = (ImageView) itemView.findViewById(R.id.character_image);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout); //modif
+            character_name = itemView.findViewById(R.id.character_name);
+            character_image = itemView.findViewById(R.id.character_image);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
 
-            itemView.setOnClickListener(new View.OnClickListener() { //modif
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null){

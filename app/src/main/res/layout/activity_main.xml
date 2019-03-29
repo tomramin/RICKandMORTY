@@ -5,22 +5,22 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/rick_and_morty">
+    tools:context=".View.MainActivity"
+    android:background="@drawable/pickle_rick">
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search"></SearchView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+        android:scrollbars="vertical"
+        android:layout_below="@+id/search_view"></android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/button2"
-        android:onClick="playMusic"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
-        android:text="Song" />
 
 </RelativeLayout>

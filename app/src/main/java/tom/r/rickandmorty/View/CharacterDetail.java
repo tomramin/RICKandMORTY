@@ -1,4 +1,4 @@
-package tom.r.rickandmorty;
+package tom.r.rickandmorty.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,20 +9,26 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.lang.*;
-import static tom.r.rickandmorty.MainActivity.EXTRA_NAME;
-import static tom.r.rickandmorty.MainActivity.EXTRA_STATUS;
-import static tom.r.rickandmorty.MainActivity.EXTRA_SPECIES;
-import static tom.r.rickandmorty.MainActivity.EXTRA_GENDER;
-import static tom.r.rickandmorty.MainActivity.EXTRA_URL;
 
+import tom.r.rickandmorty.R;
+
+import static tom.r.rickandmorty.View.MainActivity.EXTRA_NAME;
+import static tom.r.rickandmorty.View.MainActivity.EXTRA_STATUS;
+import static tom.r.rickandmorty.View.MainActivity.EXTRA_SPECIES;
+import static tom.r.rickandmorty.View.MainActivity.EXTRA_GENDER;
+import static tom.r.rickandmorty.View.MainActivity.EXTRA_URL;
+
+/**
+ * @author Tom
+ */
 public class CharacterDetail extends AppCompatActivity {
 
+    // recover data from main activity (put extra)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_detail);
 
-        //modif
         Intent intent = getIntent();
         String characterName = intent.getStringExtra(EXTRA_NAME);
         String characterStatus = intent.getStringExtra(EXTRA_STATUS);

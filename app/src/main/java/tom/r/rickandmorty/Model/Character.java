@@ -1,5 +1,8 @@
 package tom.r.rickandmorty.Model;
 
+/**
+ * @author Tom
+ */
 public class Character {
 
     private String name;
@@ -9,6 +12,7 @@ public class Character {
     private String gender;
     private String image;
 
+    // Constructor
     public Character(String name, String status, String species, String gender, String image) {
         this.name = name;
         this.status = status;
@@ -17,6 +21,7 @@ public class Character {
         this.image = image;
     }
 
+    // Getters
     public String getName() {
         return name;
     }
